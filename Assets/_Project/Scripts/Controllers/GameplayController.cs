@@ -28,10 +28,11 @@ namespace Delta.ProjectName
             _gameplayUI = gameplayUI;
         }
 
-        public async Task LoadLevelAssetAsync(int level)
+        public async Task<int> LoadLevelAssetAsync(int level)
         {
             // Load level assets asynchronously here
             await Task.CompletedTask;
+            return 1;
         }
 
         public void SetupLevel(int level)

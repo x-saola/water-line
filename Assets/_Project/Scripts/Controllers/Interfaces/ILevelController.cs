@@ -15,7 +15,7 @@ namespace Delta.ProjectName
         event System.Action OnLevelWin;
         event System.Action OnLevelLose;
 
-        Task LoadLevelAssetAsync(int level);
+        Task<int> LoadLevelAssetAsync(int level);
         void SetupLevel(int level);
         void StartLevel();
         void PauseLevel();
