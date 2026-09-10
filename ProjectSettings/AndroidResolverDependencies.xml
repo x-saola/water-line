@@ -1,0 +1,56 @@
+<dependencies>
+  <packages>
+    <package>androidx.constraintlayout:constraintlayout:2.1.4</package>
+    <package>androidx.lifecycle:lifecycle-process:2.6.2</package>
+    <package>com.adjust.sdk:adjust-android:5.6.1</package>
+    <package>com.android.installreferrer:installreferrer:2.2</package>
+    <package>com.android.support:support-annotations:28.0.0</package>
+    <package>com.applovin.mediation:google-adapter:[24.5.0.0]</package>
+    <package>com.applovin:applovin-sdk:13.3.1</package>
+    <package>com.facebook.android:audience-network-sdk:6.4.0</package>
+    <package>com.google.android.gms:play-services-ads:24.5.0</package>
+    <package>com.google.android.gms:play-services-ads-identifier:18.0.1</package>
+    <package>com.google.android.gms:play-services-appset:16.0.2</package>
+    <package>com.google.android.gms:play-services-base:18.6.0</package>
+    <package>com.google.android.ump:user-messaging-platform:3.2.0</package>
+    <package>com.google.firebase:firebase-analytics:22.4.0</package>
+    <package>com.google.firebase:firebase-analytics-unity:12.10.1</package>
+    <package>com.google.firebase:firebase-app-unity:12.10.1</package>
+    <package>com.google.firebase:firebase-auth:23.2.0</package>
+    <package>com.google.firebase:firebase-auth-unity:12.10.1</package>
+    <package>com.google.firebase:firebase-common:21.0.0</package>
+    <package>com.google.firebase:firebase-config:22.1.0</package>
+    <package>com.google.firebase:firebase-config-unity:12.10.1</package>
+    <package>com.google.firebase:firebase-crashlytics-ndk:19.4.2</package>
+    <package>com.google.firebase:firebase-crashlytics-unity:12.10.1</package>
+  </packages>
+  <files>
+    <file>Assets/GeneratedLocalRepo/Firebase/m2repository/com/google/firebase/firebase-analytics-unity/12.10.1/firebase-analytics-unity-12.10.1.aar</file>
+    <file>Assets/GeneratedLocalRepo/Firebase/m2repository/com/google/firebase/firebase-analytics-unity/12.10.1/firebase-analytics-unity-12.10.1.pom</file>
+    <file>Assets/GeneratedLocalRepo/Firebase/m2repository/com/google/firebase/firebase-app-unity/12.10.1/firebase-app-unity-12.10.1.aar</file>
+    <file>Assets/GeneratedLocalRepo/Firebase/m2repository/com/google/firebase/firebase-app-unity/12.10.1/firebase-app-unity-12.10.1.pom</file>
+    <file>Assets/GeneratedLocalRepo/Firebase/m2repository/com/google/firebase/firebase-auth-unity/12.10.1/firebase-auth-unity-12.10.1.aar</file>
+    <file>Assets/GeneratedLocalRepo/Firebase/m2repository/com/google/firebase/firebase-auth-unity/12.10.1/firebase-auth-unity-12.10.1.pom</file>
+    <file>Assets/GeneratedLocalRepo/Firebase/m2repository/com/google/firebase/firebase-config-unity/12.10.1/firebase-config-unity-12.10.1.aar</file>
+    <file>Assets/GeneratedLocalRepo/Firebase/m2repository/com/google/firebase/firebase-config-unity/12.10.1/firebase-config-unity-12.10.1.pom</file>
+    <file>Assets/GeneratedLocalRepo/Firebase/m2repository/com/google/firebase/firebase-crashlytics-unity/12.10.1/firebase-crashlytics-unity-12.10.1.aar</file>
+    <file>Assets/GeneratedLocalRepo/Firebase/m2repository/com/google/firebase/firebase-crashlytics-unity/12.10.1/firebase-crashlytics-unity-12.10.1.pom</file>
+  </files>
+  <settings>
+    <setting name="androidAbis" value="arm64-v8a,armeabi-v7a" />
+    <setting name="bundleId" value="com.delta.atom" />
+    <setting name="explodeAars" value="True" />
+    <setting name="gradleBuildEnabled" value="True" />
+    <setting name="gradlePropertiesTemplateEnabled" value="True" />
+    <setting name="gradleTemplateEnabled" value="True" />
+    <setting name="installAndroidPackages" value="True" />
+    <setting name="localMavenRepoDir" value="Assets/GeneratedLocalRepo" />
+    <setting name="packageDir" value="Assets/Plugins/Android" />
+    <setting name="patchAndroidManifest" value="True" />
+    <setting name="patchMainTemplateGradle" value="True" />
+    <setting name="projectExportEnabled" value="False" />
+    <setting name="useFullCustomMavenRepoPathWhenExport" value="True" />
+    <setting name="useFullCustomMavenRepoPathWhenNotExport" value="False" />
+    <setting name="useJetifier" value="True" />
+  </settings>
+</dependencies>

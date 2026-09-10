@@ -1,0 +1,124 @@
+[General]
+ios_app_id = 
+ios_bundle_id = 
+android_package_name = com.delta.atom
+enable_fps_counter = true
+fps_update_interval = 0.5
+
+[Feedback]
+api_endpoint = https://apibi.athena.studio/api/v2/feedback
+
+[ReportIAP]
+dev_env = true
+verify_receipt = true
+receipt_api_dev = https://iap-receipt-verify-545te7xmaa-uc.a.run.app/iap/receive
+verify_api_dev = https://iap-receipt-verify-545te7xmaa-uc.a.run.app/iap/verify
+auth_user_dev = EgT2W7mGtyxzRaxQ3bebYLJ2LEDx8khdhzHHdGPG
+auth_pass_dev = R@sGQ2@x9VR$yZN$nXFZdCnpeLqzv%Jn8y2NGkJ2
+encrypt_key_dev = chbT16&TvgSX&k1SJ!7bDa*w5uq$UkEv
+receipt_api = https://www.iap.platform.money/iap/receive
+verify_api = https://www.iap.platform.money/iap/verify
+auth_user = vgUsfcgkKBqsw5h$ksgW&H7J3FhUzaYQ
+auth_pass = &y3tLS6a&1nSAM!D91ne82dfMx%^hWg4
+encrypt_key = hJDa2dJa9jsyf!g9jRQP!Y*G8#XmXHMT
+retry_count = 3
+
+[AdConfig]
+use_adaptive_banner = true
+enable_padding_banner = true
+test_devices = 
+ios_hide_banner_ad_when_app_paused = false
+ios_hide_banner_ad_when_app_low_perf = false
+enable_google_cmp = true
+
+[Admob]
+ios_banner_ad_id = 
+ios_interstitial_ad_id = 
+ios_softlaunch_ad_id = 
+ios_coldstart_ad_id = 
+ios_adbreak_ad_id = 
+ios_rewarded_ad_id = 
+android_banner_ad_id = 
+android_interstitial_ad_id = 
+android_softlaunch_ad_id = 
+android_coldstart_ad_id = 
+android_adbreak_ad_id = 
+android_rewarded_ad_id = 
+enable_admob_mediation = false
+
+[MAX]
+MAX_SDK_key = 
+MAX_ios_banner_ad_id = 
+MAX_ios_interstitial_ad_id = 
+MAX_ios_softlaunch_ad_id = 
+MAX_ios_coldstart_ad_id = 
+MAX_ios_adbreak_ad_id = 
+MAX_ios_rewarded_ad_id = 
+MAX_android_banner_ad_id = 
+MAX_android_interstitial_ad_id = 
+MAX_android_softlaunch_ad_id = 
+MAX_android_coldstart_ad_id = 
+MAX_android_adbreak_ad_id = 
+MAX_android_rewarded_ad_id = 
+MAX_show_mediation_debugger = false
+MAX_set_unified_consent_flow = true
+MAX_set_user_journey = true
+
+[AMAZON]
+Amazon_ios_app_id = 
+Amazon_ios_banner_slot_id = 
+Amazon_ios_interstitial_slot_id = 
+Amazon_ios_rewarded_slot_id = 
+Amazon_android_app_id = 
+Amazon_android_banner_slot_id = 
+Amazon_android_interstitial_slot_id = 
+Amazon_android_rewarded_slot_id = 
+Amazon_enable_test = true
+
+[RemoteConfigs]
+auto_run_first_fetch = true
+duration_cache_expired = 3600
+duration_retry_next_fetch = 600
+
+[AGS]
+firebase_project_id = 
+ags_root_api = https://prod.api.athena.tools
+ags_api_users = api/v2/users
+ags_user_name = 54784a8994c289b1f4b552b52c0d17e631161030da636ae2
+ags_password = 334710bc20abf128cf0ca2b48d5b71050aead5121dcb213476e3605175d
+max_retry_count = 3
+time_to_next_register = 86400
+
+[Analytics]
+duration_session_timeout = 1800
+ios_fb_app_id =
+android_fb_app_id =
+
+[AppsFlyer]
+ios_dev_key = hpC4qLBzcaMZNEtYeoh4pe
+android_dev_key = hpC4qLBzcaMZNEtYeoh4pe
+track_enabled = true
+
+[Adjust]
+sandbox = false
+log_level = 3
+ios_app_token = 
+android_app_token = hlsuazpubtvk
+; Names are seperated by commas
+event_names = in_app_purchase
+; Tokens are seperated by commas
+ios_event_tokens = 
+android_event_tokens = 
+is_log_ad_revenue = true
+is_use_adjust_purchase = true
+is_set_meta_referrer = false
+
+[Flurry]
+using_flurry = true
+ios_api_key = 
+android_api_key = 
+
+[PerformanceMonitor]
+trace_enabled = false
+monitor_interstitial_ad_load = false
+monitor_rewarded_ad_load = false

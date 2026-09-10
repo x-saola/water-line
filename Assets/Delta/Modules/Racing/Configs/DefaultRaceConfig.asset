@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d4d62248f184657b115ba91faa971f, type: 3}
+  m_Name: DefaultRaceConfig
+  m_EditorClassIdentifier: 
+  unlockLevel: 40
+  objectivesRequired: 15
+  aiProgressIntervalMin: 120
+  aiProgressIntervalMax: 300
+  multipleAIProgressChance: 0.3
+  eventDurationSeconds: 259200
+  eventPauseSeconds: 259200
+  firstPlaceRewards:
+  - type: 0
+    amount: 50
+    icon: {fileID: 21300000, guid: 77fe6b66ab9244d54a804e26bd46adae, type: 3}
+  - type: 1
+    amount: 10
+    icon: {fileID: 21300000, guid: 49ce9a232e4fe4f38a6cd83bad8d7072, type: 3}
+  - type: 2
+    amount: 1
+    icon: {fileID: 21300000, guid: 1ea50c3694b9b49a9b461ab6ed5d336a, type: 3}
+  secondPlaceRewards:
+  - type: 0
+    amount: 25
+    icon: {fileID: 21300000, guid: 77fe6b66ab9244d54a804e26bd46adae, type: 3}
+  - type: 2
+    amount: 1
+    icon: {fileID: 21300000, guid: 1ea50c3694b9b49a9b461ab6ed5d336a, type: 3}
+  thirdPlaceRewards:
+  - type: 0
+    amount: 10
+    icon: {fileID: 21300000, guid: 77fe6b66ab9244d54a804e26bd46adae, type: 3}
+  - type: 2
+    amount: 1
+    icon: {fileID: 21300000, guid: 1ea50c3694b9b49a9b461ab6ed5d336a, type: 3}
+  numberOfOpponents: 4
+  avatarCount: 7
+  cooldownSeconds: 3600
+  maxDailyRaces: 99
+  entryCurrencyId: coin
+  entryCurrencyAmount: 50
+  adRewardMultiplier: 2
+  skipCooldownCost: 50
+  extraRaceCost: 100
+  adPlacementId: RaceSystem

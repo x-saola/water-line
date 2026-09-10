@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0b9addb1a2ab42b384916fb859fec1c, type: 3}
+  m_Name: WinStreakConfig
+  m_EditorClassIdentifier: 
+  unlockLevel: 25
+  duration: 72
+  pauseDuration: 72
+  botNames:
+  - Alice
+  - Bob
+  - Charlie
+  - David
+  - Eve
+  - Frank
+  - Grace
+  - Heidi
+  - Ivan
+  - Judy
+  - Tupd
+  - dlwlrma
+  - imissher
+  - Obama
+  - Trump
+  - Donald
+  - SonGoku
+  - Sasuke
+  - Onnichan
+  - Bakka
+  botCount: 14
+  botUpdateIntervalMinutes: 30
+  minStreakIncrement: 0
+  maxStreakIncrement: 3
+  botLossChancePercent: 20
+  initialStreakMin: 0
+  initialStreakMax: 2
+  usePlayerRelativeScaling: 1
+  playerRelativeMinPercent: 50
+  playerRelativeMaxPercent: 120
+  milestones:
+  - startValue: 3
+    interval: 10
+    rewards:
+    - type: 0
+      amount: 5
+      icon: {fileID: 21300000, guid: 77fe6b66ab9244d54a804e26bd46adae, type: 3}
+  - startValue: 5
+    interval: 10
+    rewards:
+    - type: 0
+      amount: 10
+      icon: {fileID: 21300000, guid: 77fe6b66ab9244d54a804e26bd46adae, type: 3}
+  - startValue: 7
+    interval: 10
+    rewards:
+    - type: 0
+      amount: 15
+      icon: {fileID: 21300000, guid: 77fe6b66ab9244d54a804e26bd46adae, type: 3}
+    - type: 2
+      amount: 1
+      icon: {fileID: 21300000, guid: d6577a871507144299dea22320588457, type: 3}
+  - startValue: 10
+    interval: 10
+    rewards:
+    - type: 1
+      amount: 10
+      icon: {fileID: 21300000, guid: 49ce9a232e4fe4f38a6cd83bad8d7072, type: 3}

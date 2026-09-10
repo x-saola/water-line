@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "919936830809",
+    "project_id": "atom-dev-test",
+    "storage_bucket": "atom-dev-test.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:919936830809:android:604b4eede4fb42658bd048",
+        "android_client_info": {
+          "package_name": "com.delta.atom"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHXdbCc656mJAPToIR8NvZsOTOJqV50p0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

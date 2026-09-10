@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82e45816aada4405083450ccc80a4409, type: 3}
+  m_Name: NewSpinWheelConfig
+  m_EditorClassIdentifier: 
+  unlockLevel: 7
+  wheelPieces:
+  - id: 1
+    reward:
+      rewardId: 1
+      amount: 5
+      icon: {fileID: 21300000, guid: 2889a4a4de2434c749af6757508f21c8, type: 3}
+      label: Coins
+    Chance: 20
+    Index: 0
+    weight: 20
+    CenterColor: {r: 1, g: 0.3, b: 0.3, a: 1}
+    EdgeColor: {r: 0.7, g: 0.21000001, b: 0.21000001, a: 0.7}
+  - id: 2
+    reward:
+      rewardId: 2
+      amount: 10
+      icon: {fileID: 21300000, guid: b39a126066bd64337b932246d62bc794, type: 3}
+      label: Coins
+    Chance: 6
+    Index: 1
+    weight: 26
+    CenterColor: {r: 0.3, g: 0.6, b: 1, a: 1}
+    EdgeColor: {r: 0.21000001, g: 0.42000002, b: 0.7, a: 0.7}
+  - id: 3
+    reward:
+      rewardId: 3
+      amount: 15
+      icon: {fileID: 21300000, guid: e0ded4116da83406b98159ccf1a9aa36, type: 3}
+      label: Coins
+    Chance: 5
+    Index: 2
+    weight: 31
+    CenterColor: {r: 1, g: 0.8, b: 0.2, a: 1}
+    EdgeColor: {r: 0.7, g: 0.56, b: 0.14, a: 0.7}
+  - id: 4
+    reward:
+      rewardId: 4
+      amount: 2
+      icon: {fileID: 21300000, guid: 0462bec96f86043af9d39f4e762ee097, type: 3}
+      label: Gems
+    Chance: 3
+    Index: 3
+    weight: 34
+    CenterColor: {r: 0.4, g: 1, b: 0.4, a: 1}
+    EdgeColor: {r: 0.28, g: 0.7, b: 0.28, a: 0.7}
+  - id: 5
+    reward:
+      rewardId: 5
+      amount: 5
+      icon: {fileID: 21300000, guid: c102567ba82a14131903e66d5f8b39d3, type: 3}
+      label: Gems
+    Chance: 2
+    Index: 4
+    weight: 36
+    CenterColor: {r: 1, g: 0.5, b: 0.9, a: 1}
+    EdgeColor: {r: 0.7, g: 0.35, b: 0.63, a: 0.7}
+  - id: 6
+    reward:
+      rewardId: 6
+      amount: 10
+      icon: {fileID: 21300000, guid: e70e4c0ae61184b648a1d3a34d9c2a26, type: 3}
+      label: Gems
+    Chance: 1
+    Index: 5
+    weight: 37
+    CenterColor: {r: 0.9, g: 0.6, b: 0.2, a: 1}
+    EdgeColor: {r: 0.63, g: 0.42000002, b: 0.14, a: 0.7}
+  - id: 7
+    reward:
+      rewardId: 7
+      amount: 1
+      icon: {fileID: 21300000, guid: d6577a871507144299dea22320588457, type: 3}
+      label: Booster
+    Chance: 3
+    Index: 6
+    weight: 40
+    CenterColor: {r: 0.6, g: 0.3, b: 1, a: 1}
+    EdgeColor: {r: 0.42000002, g: 0.21000001, b: 0.7, a: 0.7}
+  - id: 8
+    reward:
+      rewardId: 8
+      amount: 1
+      icon: {fileID: 21300000, guid: 16cd28d9e5c7d41ffab97576b0187aea, type: 3}
+      label: Skip Ad Ticket
+    Chance: 3
+    Index: 7
+    weight: 43
+    CenterColor: {r: 0.3, g: 1, b: 1, a: 1}
+    EdgeColor: {r: 0.21000001, g: 0.7, b: 0.7, a: 0.7}

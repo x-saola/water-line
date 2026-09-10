@@ -1,0 +1,42 @@
+{
+  "name": "com.athena.onesdktool",
+  "version": "1.1.0-preview",
+  "displayName": "One SDK Tool",
+  "type": "module",
+  "unity": "2019.4",
+  "scopedRegistries": [
+    {
+      "name": "One Sdk Tools",
+      "url": "https://athena.studio",
+      "scopes": [
+        "com.athena"
+      ]
+    }
+  ],
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.0.2"
+  },
+  "lock": {
+    "com.athena.onesdktool": {
+      "hash": "f14b0a9c57af41d12a8282754340f367898197e7",
+      "revision": "v1.0.9"
+    }
+  },
+  "author": {
+    "name": "OneSDK",
+    "email": "support@athena.studio",
+    "url": "https://athena.studio"
+  },
+  "keywords": [
+    "one",
+    "sdk",
+    "tool"
+  ],
+  "hideInEditor": false,
+  "repository": {
+    "url": "https://gitlab.com/game_athena/mobile_game/onesdktool.git",
+    "type": "git",
+    "revision": "a45e2ed2e21a0568928265f6c8de0ecd0cec41bc"
+  },
+  "description": "The One SDK Tools package provides the Unity Editor with support for Unity-specific features from the"
+}
