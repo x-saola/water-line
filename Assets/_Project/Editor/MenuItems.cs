@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 using UnityEditor.SceneManagement;
+using Delta.LevelEditor;
 
 namespace Delta.ProjectName
 {
@@ -56,6 +57,12 @@ namespace Delta.ProjectName
             ClearTempData();
         }
         #endregion
+
+        [MenuItem("_Project/Level Editor #l", false, PRIORITY_OPEN - 1)]
+        public static void OpenLevelEditor()
+        {
+            LevelEditorWindow.Open();
+        }
 
         [MenuItem("_Project/Memory/UnloadAllUnusedAssets", false)]
         public static void UnloadAllUnusedAsset()

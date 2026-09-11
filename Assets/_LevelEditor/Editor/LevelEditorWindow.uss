@@ -1,0 +1,457 @@
+.toolbar {
+    flex-direction: row;
+    align-items: center;
+    padding: 7px 10px;
+    background-color: rgb(38, 38, 40);
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(20, 20, 20);
+}
+
+.toolbar-group {
+    flex-direction: row;
+    align-items: center;
+    margin-left: 6px;
+    margin-right: 6px;
+    padding: 1px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.toolbar-group Button {
+    border-radius: 3px;
+}
+
+.btn-accent {
+    background-color: rgb(64, 132, 214);
+    color: rgb(245, 245, 245);
+    border-radius: 3px;
+    transition-property: background-color;
+    transition-duration: 0.1s;
+}
+
+.btn-accent:hover {
+    background-color: rgb(85, 150, 226);
+}
+
+.btn-secondary {
+    background-color: rgba(255, 255, 255, 0.06);
+    color: rgb(210, 210, 210);
+    border-radius: 3px;
+    transition-property: background-color;
+    transition-duration: 0.1s;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.btn-save {
+    margin-left: 6px;
+    border-radius: 3px;
+    transition-property: background-color;
+    transition-duration: 0.1s;
+}
+
+.btn-save--dirty {
+    background-color: rgb(180, 138, 45);
+    color: rgb(40, 30, 10);
+}
+
+.btn-save--dirty:hover {
+    background-color: rgb(200, 155, 55);
+}
+
+.path-label {
+    flex-grow: 1;
+    -unity-text-align: middle-left;
+    color: rgb(150, 150, 154);
+    margin-left: 10px;
+    font-size: 11px;
+}
+
+.path-label--saved {
+    color: rgb(120, 200, 140);
+    -unity-font-style: bold;
+}
+
+.dirty-dot {
+    color: rgb(230, 150, 50);
+    margin-left: 4px;
+    font-size: 14px;
+}
+
+.level-bar {
+    flex-direction: row;
+    align-items: center;
+    padding: 7px 10px;
+    background-color: rgb(45, 45, 48);
+    border-bottom-width: 1px;
+    border-bottom-color: rgb(20, 20, 20);
+}
+
+.level-id-field {
+    margin-right: 12px;
+    min-width: 140px;
+}
+
+.level-name-field {
+    margin-right: 12px;
+    min-width: 220px;
+}
+
+.editor-body {
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+.left-col {
+    width: 300px;
+    padding: 10px;
+    background-color: rgb(42, 42, 44);
+    border-right-width: 1px;
+    border-right-color: rgb(20, 20, 20);
+}
+
+.panel-card {
+    background-color: rgb(50, 50, 53);
+    border-width: 1px;
+    border-color: rgb(30, 30, 32);
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.panel-title {
+    -unity-font-style: bold;
+    font-size: 11px;
+    color: rgb(150, 165, 190);
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.stepper-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+.stepper-label {
+    color: rgb(210, 210, 210);
+    font-size: 12px;
+}
+
+.stepper {
+    flex-direction: row;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.stepper-btn {
+    width: 24px;
+    height: 22px;
+    -unity-text-align: middle-center;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    border-width: 0;
+    border-radius: 0;
+    color: rgb(215, 215, 215);
+    transition-property: background-color;
+    transition-duration: 0.08s;
+}
+
+.stepper-btn:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.stepper-btn:active {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.stepper-btn:disabled {
+    opacity: 0.3;
+}
+
+.stepper-value {
+    min-width: 46px;
+    -unity-text-align: middle-center;
+    color: rgb(235, 235, 235);
+    -unity-font-style: bold;
+    font-size: 12px;
+}
+
+.stepper-value-field {
+    margin: 0;
+    padding: 0;
+}
+
+.stepper-value-field > .unity-base-text-field__input {
+    background-color: transparent;
+    border-width: 0;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    -unity-text-align: middle-center;
+    color: rgb(235, 235, 235);
+    -unity-font-style: bold;
+    font-size: 12px;
+    transition-property: background-color;
+    transition-duration: 0.08s;
+}
+
+.stepper-value-field > .unity-base-text-field__input:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.stepper-value-field > .unity-base-text-field__input:focus {
+    background-color: rgba(255, 255, 255, 0.14);
+}
+
+.add-anchor-btn {
+    margin-top: 4px;
+    margin-bottom: 2px;
+    border-radius: 3px;
+}
+
+.remove-anchor-btn {
+    margin-top: 4px;
+    margin-bottom: 2px;
+    border-radius: 3px;
+    background-color: rgba(200, 80, 70, 0.18);
+    color: rgb(230, 160, 150);
+    transition-property: background-color;
+    transition-duration: 0.1s;
+}
+
+.remove-anchor-btn:hover {
+    background-color: rgba(200, 80, 70, 0.3);
+}
+
+.tool-palette {
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.tool-btn {
+    margin: 3px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: rgb(200, 200, 204);
+    transition-property: background-color;
+    transition-duration: 0.1s;
+}
+
+.tool-btn:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.tool-btn--active {
+    background-color: rgb(90, 130, 190);
+    color: rgb(245, 245, 245);
+}
+
+/* Per-tool active colors mirror the matching board-cell-- colors below, so the
+   palette reads as a legend for what's painted on the grid. */
+.tool-btn--placea.tool-btn--active {
+    background-color: rgb(45, 160, 148);
+}
+
+.tool-btn--placeb.tool-btn--active {
+    background-color: rgb(225, 135, 55);
+}
+
+.tool-btn--placec.tool-btn--active {
+    background-color: rgb(225, 190, 55);
+    color: rgb(40, 35, 10);
+}
+
+.tool-btn--rock.tool-btn--active {
+    background-color: rgb(120, 120, 124);
+}
+
+.tool-btn--boulder.tool-btn--active {
+    background-color: rgb(150, 115, 80);
+}
+
+.tool-btn--valve.tool-btn--active {
+    background-color: rgb(60, 120, 150);
+}
+
+.tool-btn--plusonepipe.tool-btn--active {
+    background-color: rgb(200, 170, 40);
+    color: rgb(40, 35, 10);
+}
+
+.validation-box {
+    padding: 8px;
+    margin-bottom: 6px;
+    border-radius: 4px;
+    border-left-width: 3px;
+}
+
+.validation-box--ok {
+    background-color: rgba(60, 140, 80, 0.18);
+    border-left-color: rgb(90, 190, 120);
+}
+
+.validation-box--error {
+    background-color: rgba(160, 60, 50, 0.18);
+    border-left-color: rgb(210, 90, 80);
+}
+
+.validation-box--warn {
+    background-color: rgba(180, 130, 30, 0.18);
+    border-left-color: rgb(220, 165, 60);
+}
+
+.validation-summary {
+    -unity-font-style: bold;
+    margin-bottom: 3px;
+    font-size: 12px;
+}
+
+.validation-msg {
+    font-size: 11px;
+    margin-top: 1px;
+}
+
+.validation-msg--error {
+    color: rgb(230, 140, 130);
+}
+
+.validation-msg--warn {
+    color: rgb(230, 190, 120);
+}
+
+.validation-ok-label {
+    color: rgb(140, 220, 160);
+    -unity-font-style: bold;
+}
+
+.board-scroll-container {
+    flex-grow: 1;
+    padding: 14px;
+    background-color: rgb(32, 32, 34);
+}
+
+.board-container {
+    flex-direction: column;
+}
+
+.board-row {
+    flex-direction: row;
+}
+
+.board-cell {
+    width: 48px;
+    height: 48px;
+    margin: 2px;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(54, 54, 58);
+    border-width: 1px;
+    border-color: transparent;
+    border-radius: 4px;
+    transition-property: border-color;
+    transition-duration: 0.08s;
+}
+
+.board-cell:hover {
+    border-color: rgba(255, 255, 255, 0.55);
+}
+
+.board-cell--empty {
+    background-color: rgb(46, 40, 34);
+}
+
+.empty-dot {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+.board-cell--anchor-a {
+    background-color: rgb(35, 145, 132);
+}
+
+.board-cell--anchor-b {
+    background-color: rgb(210, 122, 45);
+}
+
+.board-cell--anchor-c {
+    background-color: rgb(210, 178, 45);
+}
+
+.anchor-digit {
+    color: rgb(255, 255, 255);
+    -unity-font-style: bold;
+    font-size: 16px;
+}
+
+.board-cell--anchor-c .anchor-digit {
+    color: rgb(40, 35, 10);
+}
+
+.board-cell--rock {
+    background-color: rgb(64, 64, 68);
+}
+
+.board-cell--boulder {
+    background-color: rgb(108, 84, 60);
+}
+
+.board-cell--valve {
+    background-color: rgb(48, 92, 116);
+}
+
+.board-cell--plusonepipe {
+    background-color: rgb(168, 142, 32);
+}
+
+.obstacle-glyph {
+    color: rgb(235, 235, 235);
+    font-size: 18px;
+    -unity-font-style: bold;
+}
+
+.import-shield {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.55);
+}
+
+.import-panel {
+    position: absolute;
+    left: 60px;
+    right: 60px;
+    top: 60px;
+    bottom: 60px;
+    background-color: rgb(46, 46, 49);
+    padding: 14px;
+    border-radius: 6px;
+    border-width: 1px;
+    border-color: rgb(20, 20, 20);
+}
+
+.import-textfield {
+    flex-grow: 1;
+    white-space: normal;
+    margin-top: 8px;
+    margin-bottom: 4px;
+}
+
+.import-button-row {
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 8px;
+}
+
+.import-button-row Button {
+    margin-left: 6px;
+    min-width: 70px;
+}

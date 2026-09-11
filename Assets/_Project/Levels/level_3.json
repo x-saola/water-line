@@ -1,0 +1,27 @@
+{
+  "SchemaVersion": 1,
+  "LevelId": "level_3",
+  "LevelName": "Quick Win",
+  "Columns": 4,
+  "Rows": 4,
+  "TimeLimitSeconds": 0,
+  "Pipes": [
+    {
+      "Id": "A",
+      "StartCell": {
+        "Row": 0,
+        "Column": 0
+      },
+      "MoveBudget": 3
+    },
+    {
+      "Id": "B",
+      "StartCell": {
+        "Row": 0,
+        "Column": 3
+      },
+      "MoveBudget": 3
+    }
+  ],
+  "Obstacles": []
+}

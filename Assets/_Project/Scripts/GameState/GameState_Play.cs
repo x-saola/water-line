@@ -16,7 +16,6 @@ namespace Delta.ProjectName
     {
         private IAdService _adService;
         private AdConfigSO _adConfig;
-        // private EconomyConfig _economyConfig;
         private IAudioService _audioService;
         private ITrackingService _trackingService;
         private IUserDataService _userDataService;
@@ -33,15 +32,18 @@ namespace Delta.ProjectName
         private string _levelUniqueId;
         private int _attempts;
 
+        // Set by OnNextRequested; ResolveLevelIdToPlay consumes and clears it. No player-facing
+        // progression/level-select exists (out of scope, see plan) - absent an override this
+        // always defaults to the first saved level.
+        private string _forcedLevelId;
+
         private SettingsUI _settingsUI;
-        private DifficultyUI _levelDifficultyUI;
         private CancellationTokenSource _initializeGameplayCts;
 
         protected override void OnEnter()
         {
             _adService = ServiceLocator.Get<IAdService>();
             ServiceLocator.TryGet<AdConfigSO>(out _adConfig);
-            // ServiceLocator.TryGet<EconomyConfig>(out _economyConfig);
             _audioService = ServiceLocator.Get<IAudioService>();
             _trackingService = ServiceLocator.Get<ITrackingService>();
             _userDataService = ServiceLocator.Get<IUserDataService>();
@@ -92,51 +94,45 @@ namespace Delta.ProjectName
                 AtomEvent.Trigger(AtomEventType.AppResumed);
             }
         }
-        
+
         private void OnSceneLoaded()
         {
             _gameplayController = UnityEngine.Object.FindFirstObjectByType<GamePlayController>();
-            // _gameplayController.SetBackgroundCanvas(false);
 
-            _gameplayUI = UIManager.Instance.ShowUIOnTop<GamePlayUI>("GameplayUI");
-            _gameplayUI.OnSettings += Settings;
-
-            _gameplayController.Initialize(_gameplayUI);
             _gameplayController.OnLevelStarted += OnLevelStarted;
             _gameplayController.OnLevelWin += OnLevelWin;
             _gameplayController.OnLevelLose += OnLevelLose;
 
             InitializeGameplay();
-
-            if(_gameplayUI != null)
-                _gameplayUI.OnSettings += Settings;
         }
-        
-        private async void InitializeGameplay(bool releaseAllUIs = false)
+
+        private async void InitializeGameplay()
         {
             _initializeGameplayCts?.Cancel();
             _initializeGameplayCts?.Dispose();
             _initializeGameplayCts = new CancellationTokenSource();
             var token = _initializeGameplayCts.Token;
 
-            if (releaseAllUIs)
-                UIManager.Instance.ReleaseAllUIs();
+            UIManager.Instance.ReleaseAllUIs();
 
             _gameplayUI = UIManager.Instance.ShowUIOnTop<GamePlayUI>("GameplayUI");
             _gameplayUI.gameObject.SetActive(false);
+            _gameplayUI.OnSettings -= Settings;
+            _gameplayUI.OnSettings += Settings;
+            _gameplayController.Initialize(_gameplayUI);
 
-            int requestedLevel = Data.CurrentLevel;
-            int levelToLoad = Data.ClassicLevelModeData.GetRandomLevel(requestedLevel);
-            int resolvedContentLevel = await _gameplayController.LoadLevelAssetAsync(levelToLoad);
+            string levelId = ResolveLevelIdToPlay();
+            bool loaded = await _gameplayController.LoadLevelAsync(levelId);
             if (token.IsCancellationRequested) return;
 
-            if (resolvedContentLevel != requestedLevel)
+            if (!loaded)
             {
-                Data.ClassicLevelModeData.SetRandomLevel(requestedLevel, resolvedContentLevel);
-                _userDataService.Save();
+                Debug.LogError($"[GameState_Play] Failed to load level '{levelId}'.");
+                BackToMainMenu();
+                return;
             }
-            
-            _gameplayController.SetupLevel(requestedLevel);
+
+            _gameplayController.SetupLevel(_gameplayController.LoadedLevelConfig);
             if (token.IsCancellationRequested) return;
 
             if (LoadingUI.Instance != null)
@@ -147,130 +143,90 @@ namespace Delta.ProjectName
                 UIManager.Instance.ReleaseUI(loadingUI, true);
             }
             if (token.IsCancellationRequested) return;
-            
-            // // Play music
-            // if (_audioService.IsMusicPaused)
-            //     _audioService.ResumeBackgroundMusic();
-            // else if (_audioService.IsMusicStopped)
-            //     _audioService.PlayBackgroundMusic();
-            //
-            // // Show gameplay UI
-            // _gameplayController.SetBackgroundCanvas(true);
-            // _gameplayUI.gameObject.SetActive(true);
-            //
-            // // Start spawning bubbles
-            // var appearTask = IsEarlyLevel(requestedLevel) ? _gameplayUI.PlayTutorialAppearAnimation() : _gameplayUI.PlayAppearAnimation();
-            // await Task.WhenAll(_gameplayController.SpawnLevelBubbles(), appearTask);
-            //
-            // if (token.IsCancellationRequested) return;
-            //
-            // // Show pending booster introduce popups
-            // bool hadBoosterIntroPending = await _gameplayController.BoosterManager.ShowPendingIntroducePopupsAsync();
-            // if (token.IsCancellationRequested) return;
-            //
-            // if (_gameplayController.TutorialManager.HasTutorialForLevel(requestedLevel) &&
-            //     _gameplayController.TutorialManager.HasTutorialHandActive(requestedLevel, 0))
-            // {
-            //     var tutorialDelayTime = requestedLevel == 1 ? 1500 : 100;
-            //     await Task.Delay(hadBoosterIntroPending ? 0 : tutorialDelayTime, token);
-            //     if (token.IsCancellationRequested) return;
-            // }
-            //
-            // await ShowDifficultyWarningAsync(_gameplayController.CurrentDifficulty);
-            // if (token.IsCancellationRequested) return;
+
+            _gameplayUI.gameObject.SetActive(true);
+            await _gameplayUI.PlayAppearAnimation();
+            if (token.IsCancellationRequested) return;
 
             _gameplayController.StartLevel();
 
-            if (_adConfig == null || requestedLevel >= _adConfig.BannerShowFromLevel)
+            int levelNumber = ParseLevelNumber(_gameplayController.CurrentLevelId);
+            if (_adConfig == null || levelNumber >= _adConfig.BannerShowFromLevel)
                 _adService.ActiveBannerAd();
             else
                 _adService.DeactiveBannerAd();
         }
 
-        // Early levels (per TutorialConfig 1-4) chain straight into each other instead of
-        // stopping at a win screen, so their appear/win transitions use the faster tutorial variants.
-        private bool IsEarlyLevel(int levelCheck) => levelCheck <= 4;
+        // No player-facing level sequence/progression exists (GDD leaves this undefined - see
+        // plan's open questions). "level_1" is a placeholder entry point; the intended real
+        // entry point is WaterlinePlaySession.PlayLevel(config), checked first inside
+        // GamePlayController.LoadLevelAsync.
+        private string ResolveLevelIdToPlay()
+        {
+            if (!string.IsNullOrEmpty(_forcedLevelId))
+            {
+                var id = _forcedLevelId;
+                _forcedLevelId = null;
+                return id;
+            }
+            return "level_1";
+        }
 
-        // Normal levels skip the banner entirely; Hard/VeryHard each get their own warning prefab/art.
-        // private async Task ShowDifficultyWarningAsync(LevelDifficulty difficulty)
-        // {
-        //     if (difficulty == LevelDifficulty.Normal)
-        //         return;
-        //
-        //     string prefabName = difficulty == LevelDifficulty.VeryHard
-        //         ? "DifficultyUI_SuperHard"
-        //         : "DifficultyUI_Hard";
-        //
-        //     _levelDifficultyUI = UIManager.Instance.ShowUIOnTop<DifficultyUI>(prefabName);
-        //     await _levelDifficultyUI.PlayAppearAnimation();
-        //     UIManager.Instance.ReleaseUI(_levelDifficultyUI, true);
-        //     _levelDifficultyUI = null;
-        // }
+        private static int ParseLevelNumber(string levelId)
+        {
+            const string prefix = "level_";
+            if (!string.IsNullOrEmpty(levelId) && levelId.StartsWith(prefix) &&
+                int.TryParse(levelId.Substring(prefix.Length), out int n))
+                return n;
+            return 0;
+        }
 
         private void OnLevelStarted()
         {
             AtomEvent.Trigger(AtomEventType.LevelStarted);
 
-            _attempts = Data.ClassicLevelModeData.IncrementLevelAttempts(_gameplayController.CurrentLevel);
+            _levelId = _gameplayController.CurrentLevelId;
+            _attempts = Data.WaterlineProgress.IncrementAttempts(_levelId);
 
             var now = System.DateTime.UtcNow;
             var todayString = $"{now.Year}{now.Month:00}{now.Day:00}";
-            _levelId = _gameplayController.CurrentLevel.ToString();
             _levelUniqueId = $"{_levelId}i{_attempts}a{todayString}d";
 
             _trackingService.TrackGameStart(_gameMode, _levelUniqueId, _levelId, _attempts);
         }
 
-        private void OnLevelOver(bool isWin)
-        {
-            if (isWin)
-                _trackingService.TrackGameOver(_gameMode, _levelUniqueId, _levelId, _timeSpentTracker.TotalSeconds, 1, 0, _attempts, null);
-            else
-                _trackingService.TrackGameOver(_gameMode, _levelUniqueId, _levelId, _timeSpentTracker.TotalSeconds, 0, 0, _attempts, "OutOfMove");
-        }
-
         private async void OnLevelWin()
         {
             AtomEvent.Trigger(AtomEventType.LevelWin);
-            OnLevelOver(true);
+            _trackingService.TrackGameOver(_gameMode, _levelUniqueId, _levelId, _timeSpentTracker.TotalSeconds, 1, 0, _attempts, null);
 
-            int completedLevel = _gameplayController.CurrentLevel;
-            Data.ClassicLevelModeData.SetLevelComplete(completedLevel);
-            if (Data.ClassicLevelModeData.CurrentLevel <= completedLevel)
-                Data.ClassicLevelModeData.CurrentLevel = completedLevel + 1;
-            //
-            // int coinReward = _economyConfig != null ? _economyConfig.LevelWinCoinReward : 10;
-            // _userDataService.AddCurrency(EconomyConfig.CoinCurrencyId, coinReward, "LevelWin", completedLevel.ToString());
+            Data.WaterlineProgress.RecordCompletion(_levelId, _gameplayController.ElapsedSeconds);
             _userDataService.Save();
 
-            if (IsEarlyLevel(completedLevel + 1))
-            {
-                _gameplayUI.PlayTutorialCongratulationEffect();
-                await Task.Delay(1000);
-                await _gameplayUI.PlayTutorialDisappearAnimation();
-                InitializeGameplay(true);
-                return;
-            }
-            
             await _gameplayUI.PlayDisappearAnimation();
 
             _audioService.PlaySfx("victory");
             _audioService.PauseBackgroundMusic();
 
-            CheckShowInterstitialAd(completedLevel, () =>
+            int levelNumber = ParseLevelNumber(_levelId);
+            CheckShowInterstitialAd(levelNumber, () =>
             {
                 var winUI = UIManager.Instance.ShowUIOnTop<WinLevelUI>("WinLevelUI");
-                winUI.OnContinueButtonClicked = () => InitializeGameplay(true);
-                winUI.OnHomeButtonClicked = BackToMainMenu;
+                winUI.SetActiveHomeButton(false);
+                winUI.SetActiveRetryButton(true);
+                winUI.SetActiveContinueButton(true);
+                winUI.SetCompletionTime(_gameplayController.FormatCompletionTime());
+                winUI.OnRetryButtonClicked = RetryLevel;
+                winUI.OnContinueButtonClicked = OnNextRequested;
                 winUI.PlayAppearAnimation();
-                // winUI.PlayCoinReward(0);
             });
         }
 
         private async void OnLevelLose()
         {
             AtomEvent.Trigger(AtomEventType.LevelLose);
-            OnLevelOver(false);
+            _trackingService.TrackGameOver(_gameMode, _levelUniqueId, _levelId, _timeSpentTracker.TotalSeconds, 0, 0, _attempts, "OutOfTime");
+            _userDataService.Save();
 
             await _gameplayUI.PlayDisappearAnimation();
 
@@ -279,34 +235,55 @@ namespace Delta.ProjectName
 
             var loseUI = UIManager.Instance.ShowUIOnTop<LoseLevelUI>("LoseLevelUI");
             loseUI.ShowReviveOption(false);
-            loseUI.SetLoseCause("Out of moves");
+            loseUI.SetLoseCause("Out of Time");
             loseUI.OnRetry -= RetryLevel;
             loseUI.OnRetry += RetryLevel;
             loseUI.PlayAppearAnimation();
         }
 
+        // Immediate reset to the authored layout - no disk reload/loading screen, matching the
+        // spec's "Out of Time overlay offers an immediate retry."
         private void RetryLevel()
         {
             AtomEvent.Trigger(AtomEventType.RetryLevel);
-            // _gameplayController.TutorialManager.StopTutorial();
-            InitializeGameplay(true);
+            UIManager.Instance.ReleaseAllUIs();
+
+            _gameplayController.RestartLevel();
+
+            _gameplayUI = UIManager.Instance.ShowUIOnTop<GamePlayUI>("GameplayUI");
+            _gameplayUI.OnSettings -= Settings;
+            _gameplayUI.OnSettings += Settings;
+            _gameplayController.Initialize(_gameplayUI);
+        }
+
+        // "Next" - a bare sequential disk lookup (level_{n+1}.json), not a level-select screen
+        // (out of scope, see plan). Falls back Home if there's no next level saved yet.
+        private void OnNextRequested()
+        {
+            if (LevelLoader.TryGetNextLevelId(_levelId, out var nextLevelId))
+            {
+                _forcedLevelId = nextLevelId;
+                InitializeGameplay();
+            }
+            else
+            {
+                BackToMainMenu();
+            }
         }
 
         private void Settings_RetryLevel()
         {
-            AtomEvent.Trigger(AtomEventType.RetryLevel);
             _trackingService.TrackGameOver(_gameMode, _levelUniqueId, _levelId, _timeSpentTracker.TotalSeconds, -1, 1, _attempts, null);
-            // _gameplayController.TutorialManager.StopTutorial();
-            InitializeGameplay(true);
+            RetryLevel();
         }
-        
+
         public void BackToMainMenu()
         {
             AtomEvent.Trigger(AtomEventType.BackToMainMenu);
             _trackingService.TrackGameOver(_gameMode, _levelUniqueId, _levelId, _timeSpentTracker.TotalSeconds, -1, 1, _attempts, null);
             Machine.ChangeState<GameState_MainMenu>();
         }
-        
+
         public void Settings()
         {
             _settingsUI = UIManager.Instance.ShowUIOnTop<SettingsUI>("SettingsUI");
@@ -314,7 +291,7 @@ namespace Delta.ProjectName
             _settingsUI.OnRetryButtonClick = Settings_RetryLevel;
             _settingsUI.ShowSettingsPanel(true);
         }
-        
+
         private void CheckShowInterstitialAd(int completedLevel, Action onAdClosed)
         {
             bool showAd = !Data.HasNoAds;

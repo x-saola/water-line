@@ -15,6 +15,8 @@ namespace Delta.Modules
         [SerializeField] Image _overlay;
         [SerializeField] Button _continueButton;
         [SerializeField] Button _homeButton;
+        [SerializeField] Button _retryButton;
+        [SerializeField] TextMeshProUGUI _completionTimeText;
         [SerializeField] RectTransform _boardZone;
 
         [Header("Remove Ads")]
@@ -28,6 +30,7 @@ namespace Delta.Modules
         public RectTransform BoardZone => _boardZone;
         public System.Action OnContinueButtonClicked;
         public System.Action OnHomeButtonClicked;
+        public System.Action OnRetryButtonClicked;
 
         public System.Action OnPurchaseConfirmed;
         public System.Action OnPurchaseFailed;
@@ -39,6 +42,7 @@ namespace Delta.Modules
             _homeButton.onClick.AddListener(OnHomeButtonClickedHandler);
             _continueButton.onClick.AddListener(OnContinueButtonClickedHandler);
             _continueWithAdsButton.onClick.AddListener(OnContinueButtonClickedHandler);
+            _retryButton.onClick.AddListener(OnRetryButtonClickedHandler);
 
             _overlay.gameObject.SetActive(false);
             _parentContent.gameObject.SetActive(false);
@@ -77,6 +81,11 @@ namespace Delta.Modules
             OnHomeButtonClicked?.Invoke();
         }
 
+        private void OnRetryButtonClickedHandler()
+        {
+            OnRetryButtonClicked?.Invoke();
+        }
+
         public void SetActiveHomeButton(bool value)
         {
             _homeButton.gameObject.SetActive(value);
@@ -87,9 +96,21 @@ namespace Delta.Modules
             _continueButton.gameObject.SetActive(value);
         }
 
+        public void SetActiveRetryButton(bool value)
+        {
+            _retryButton.gameObject.SetActive(value);
+        }
+
         public void SetEnableContinueButton(bool value)
         {
             _continueButton.enabled = value;
+        }
+
+        // "Piped in mm:ss" (spec) - completion time shown on the Win overlay.
+        public void SetCompletionTime(string formattedTime)
+        {
+            if (_completionTimeText != null)
+                _completionTimeText.text = formattedTime;
         }
 
         public void ShowRemoveAdsOffer(bool show)

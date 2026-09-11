@@ -209,7 +209,7 @@ namespace Delta.GameOps
             // Firebase
             AthenaGameOpsUtils.InitFirebase(() =>
             {
-
+                Debug.Log($"[DeltaApp] [Initialize]");
                 IsFirebaseReady = true;
                 evtFirebaseInited?.Invoke();
                 SetupDefaultConfigs();

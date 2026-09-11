@@ -96,7 +96,7 @@ namespace Delta.ProjectName
 
         private void TryEnterMainMenu()
         {
-            if (_firebaseReady && _userDataReady)
+            if (_userDataReady)
                 Machine.ChangeState<GameState_MainMenu>();
         }
 

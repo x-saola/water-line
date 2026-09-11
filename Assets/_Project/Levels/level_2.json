@@ -1,0 +1,64 @@
+{
+  "SchemaVersion": 1,
+  "LevelId": "level_2",
+  "LevelName": "Obstacles",
+  "Columns": 6,
+  "Rows": 9,
+  "TimeLimitSeconds": 60,
+  "Pipes": [
+    {
+      "Id": "A",
+      "StartCell": {
+        "Row": 2,
+        "Column": 2
+      },
+      "MoveBudget": 5
+    },
+    {
+      "Id": "B",
+      "StartCell": {
+        "Row": 2,
+        "Column": 3
+      },
+      "MoveBudget": 5
+    },
+    {
+      "Id": "C",
+      "StartCell": {
+        "Row": 0,
+        "Column": 0
+      },
+      "MoveBudget": 5
+    }
+  ],
+  "Obstacles": [
+    {
+      "Cell": {
+        "Row": 8,
+        "Column": 5
+      },
+      "Type": "Rock"
+    },
+    {
+      "Cell": {
+        "Row": 1,
+        "Column": 0
+      },
+      "Type": "Boulder"
+    },
+    {
+      "Cell": {
+        "Row": 3,
+        "Column": 0
+      },
+      "Type": "Valve"
+    },
+    {
+      "Cell": {
+        "Row": 5,
+        "Column": 0
+      },
+      "Type": "PlusOnePipe"
+    }
+  ]
+}

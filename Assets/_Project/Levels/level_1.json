@@ -1,0 +1,27 @@
+{
+  "SchemaVersion": 1,
+  "LevelId": "level_1",
+  "LevelName": "Basic",
+  "Columns": 6,
+  "Rows": 9,
+  "TimeLimitSeconds": 0,
+  "Pipes": [
+    {
+      "Id": "A",
+      "StartCell": {
+        "Row": 2,
+        "Column": 2
+      },
+      "MoveBudget": 5
+    },
+    {
+      "Id": "B",
+      "StartCell": {
+        "Row": 2,
+        "Column": 3
+      },
+      "MoveBudget": 5
+    }
+  ],
+  "Obstacles": []
+}

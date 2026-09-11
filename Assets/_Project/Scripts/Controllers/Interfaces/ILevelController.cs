@@ -4,7 +4,7 @@ namespace Delta.ProjectName
 {
     public interface ILevelController
     {
-        int CurrentLevel { get; }
+        string CurrentLevelId { get; }
         bool IsStarted { get; }
         bool IsPaused { get; }
         bool IsOver { get; }
@@ -15,8 +15,8 @@ namespace Delta.ProjectName
         event System.Action OnLevelWin;
         event System.Action OnLevelLose;
 
-        Task<int> LoadLevelAssetAsync(int level);
-        void SetupLevel(int level);
+        Task<bool> LoadLevelAsync(string levelId);
+        void SetupLevel(LevelConfig config);
         void StartLevel();
         void PauseLevel();
         void ResumeLevel();

@@ -13,6 +13,7 @@ namespace Delta.ProjectName
         public bool HasNoAds;
 
         public LevelModeData ClassicLevelModeData = new();
+        public WaterlineProgressData WaterlineProgress = new();
 
         public int CurrentLevel => ClassicLevelModeData.CurrentLevel;
 

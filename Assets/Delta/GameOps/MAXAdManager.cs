@@ -808,8 +808,8 @@ namespace Delta.GameOps
         IEnumerator _FixedAndroidBannerAutoHidden()
         {
             yield return new WaitForSeconds(0.5f);
-            MaxSdk.HideBanner(BannerAdId);
-            MaxSdk.ShowBanner(BannerAdId);
+            // MaxSdk.HideBanner(BannerAdId);
+            // MaxSdk.ShowBanner(BannerAdId);
         }
 #endif
 
